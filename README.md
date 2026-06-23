@@ -19,7 +19,7 @@ The application is built using microservices architecture and deployed on Amazon
 
 ## Architecture
 
-Developer → GitHub → Jenkins Pipeline → Docker Build → Docker Registry → Amazon EKS → Application
+Developer → GitHub → Jenkins Pipeline → Docker Build → AWS ECR → Amazon EKS → Application
 
 Database: Amazon RDS (MySQL)
 
