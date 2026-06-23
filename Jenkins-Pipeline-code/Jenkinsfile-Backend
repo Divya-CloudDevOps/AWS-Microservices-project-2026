@@ -19,8 +19,8 @@ pipeline {
         }
         stage('Checkout from Git') {
             steps {
-                git branch: 'main', url: 'https://github.com/Divya-CloudDevOps/Automated_Microservices_Project_AWS_DevOps.git'
-            }
+                git branch: 'main', url: 'https://github.com/Divya-CloudDevOps/AWS-Microservices-project-2026.git 
+     }
         }
         stage('Sonarqube Analysis') {
             steps {
@@ -74,12 +74,12 @@ pipeline {
         }
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/Divya-CloudDevOps/Automated_Microservices_Project_AWS_DevOps.git'
+                git branch: 'main', url: 'https://github.com/Divya-CloudDevOps/AWS-Microservices-project-2026.git'
             }
         }
         stage('Update Deployment file') {
             environment {
-                GIT_REPO_NAME = "Automated_Microservices_Project_AWS_DevOps-main"
+                GIT_REPO_NAME = "AWS-Microservices-project-2026"
                 GIT_USER_NAME = "Divya-CloudDevOps"
             }
             steps {
