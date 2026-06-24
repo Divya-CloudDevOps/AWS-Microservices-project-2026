@@ -4,7 +4,7 @@
 This project demonstrates end-to-end cloud infrastructure automation — from provisioning AWS resources with Terraform, to containerizing microservices with Docker, deploying them on Kubernetes (EKS), and monitoring with Prometheus and Grafana. CI/CD is fully automated using Jenkins pipelines.
 
 ## Architecture
-![Architecture](./architecture.png)
+![Architecture](./architecture.gif)
 
 
 
