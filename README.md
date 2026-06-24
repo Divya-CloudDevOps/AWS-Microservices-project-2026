@@ -1,9 +1,9 @@
 # AWS-Microservices-project-2026 
 
-## Project Overview
+## 📌 Project Overview
 This project demonstrates end-to-end cloud infrastructure automation — from provisioning AWS resources with Terraform, to containerizing microservices with Docker, deploying them on Kubernetes (EKS), and monitoring with Prometheus and Grafana. CI/CD is fully automated using Jenkins pipelines.
 
-## Architecture
+##  Architecture
 ┌─────────────────────────────────────────┐
                         │               AWS Cloud                  │
                         │                                          │
@@ -19,7 +19,7 @@ This project demonstrates end-to-end cloud infrastructure automation — from pr
                         Jenkins CI/CD Pipeline
                         (Build → Scan → Push ECR → Deploy) 
 
-## Tech Stack
+## 🛠️ Tech Stack
 ---------------------------------------------------------------------------------------------------
 Category                                     Tools
 ---------------------------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ Database                                    MySQL, AWS RDS
 Scripting                                   Bash
 Version Control                             GitHUB
 
-## Repository Structure
+## 📁 Repository Structure
 
 ├── Backend/                  # Node.js backend microservice
 ├── client/                   # Frontend application
