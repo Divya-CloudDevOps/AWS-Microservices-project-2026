@@ -6,6 +6,12 @@ This project demonstrates end-to-end cloud infrastructure automation — from pr
 ## Architecture
 ![Architecture](./architecture.png)
 
+
+
+
+
+
+
 ## 🛠️ Tech Stack
 ---------------------------------------------------------------------------------------------------
 Category                                     Tools
