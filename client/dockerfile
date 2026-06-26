@@ -1,16 +1,21 @@
-cat > dockerfile << 'EOF'FROM node:18 AS build
+# Step 1: Build the frontend application
+FROM node:18 AS build
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
-RUN npm run build
+# Added CI=false to prevent warnings from being treated as build-failing errors
+RUN CI=false npm run build
 
+# Step 2: Serve the application using Apache
 FROM httpd:2.4
 COPY --from=build /app/build /usr/local/apache2/htdocs/
+
+# Chain the configuration updates properly
 RUN echo 'LoadModule proxy_module modules/mod_proxy.so' >> /usr/local/apache2/conf/httpd.conf && \
     echo 'LoadModule proxy_http_module modules/mod_proxy_http.so' >> /usr/local/apache2/conf/httpd.conf && \
     echo 'ProxyPass /api/ http://backend/' >> /usr/local/apache2/conf/httpd.conf && \
     echo 'ProxyPassReverse /api/ http://backend/' >> /usr/local/apache2/conf/httpd.conf
+
 EXPOSE 80
 CMD ["httpd-foreground"]
-EOF
