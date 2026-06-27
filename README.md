@@ -6,24 +6,22 @@ This project demonstrates end-to-end cloud infrastructure automation — from pr
 ## Architecture
 ![Architecture](./architecture.gif)
 
-
-
-
-
-
-
 ## 🛠️ Tech Stack
 ---------------------------------------------------------------------------------------------------
-Category                                     Tools
+Tools Used
 ---------------------------------------------------------------------------------------------------
-Cloud                                       AWS (EC2,VPC,S3,IAM,ECR,ALB,Route53,NAT Gateway
-Infrastructure as Code                      Terraform
-Containers                                  Docker, Amazon ECR
-Orchestration                               Kubernetes (EKS)
-CI/CD                                       Jenkins                                  
-Database                                    MySQL, AWS RDS
-Scripting                                   Bash
-Version Control                             GitHUB
+- GitHub
+- AWS EC2
+- Amazon ECR
+- Amazon EKS
+- Docker
+- Jenkins
+- Kubectl
+- AWS CLI
+- Terraform
+- React (Frontend)
+- Node.js (Backend)
+- MySQL 
 
 ## 📁 Repository Structure
 
@@ -67,12 +65,17 @@ Version Control                             GitHUB
 
 ## ⚙️ How to Deploy
 
-Prerequisites
+## Prerequisites
  • AWS account with IAM permissions
- • Terraform >= 1.3 installed
- • kubectl installed
+ • Terraform 
+ • kubectl 
  • AWS CLI configured (aws configure)
- • Docker installed
+ • Docker 
+ • Git
+ • Amazon ECR Repositories 
+ • Amazon EKS Cluster
+ • Jenkins 
+ • Java
  
 Step 1 — Provision Infrastructure
 bash----
