@@ -71,11 +71,7 @@ pipeline {
                 sh 'trivy image 910972978008.dkr.ecr.ap-south-1.amazonaws.com/client:latest > trivyimage.txt'
             }
         }
-        stage('Checkout Code') {
-            steps {
-                git branch: 'main', url: 'https://github.com/Divya-CloudDevOps/AWS-Microservices-project-2026.git'
-            }
-        }
+        
         stage('Update Deployment file') {
             environment {
                 GIT_REPO_NAME = "AWS-Microservices-project-2026"
@@ -89,7 +85,8 @@ pipeline {
                             git config user.name "Divya-CloudDevOps"
                             BUILD_NUMBER=${BUILD_NUMBER}
                             echo $BUILD_NUMBER
-                            sed -i "s#image:.*#image: ${REPOSITORY_URI}/${AWS_ECR_REPO_NAME}:latest#g" frontend-deploy-service.yaml                            git add .
+                            sed -i "s#image:.*#image: ${REPOSITORY_URI}/${AWS_ECR_REPO_NAME}:latest#g" frontend-deploy-service.yaml                          
+                            git add .
                             git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
                             git push https://${git_token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
         
