@@ -1,7 +1,8 @@
 # AWS-Microservices-project-2026 
 
 ## 📌 Project Overview
-This project demonstrates end-to-end cloud infrastructure automation — from provisioning AWS resources with Terraform, to containerizing microservices with Docker, deploying them on Kubernetes (EKS), and monitoring with Prometheus and Grafana. CI/CD is fully automated using Jenkins pipelines.
+
+This project demonstrates a complete DevOps CI/CD pipeline for the React frontend and Node.js backend application deployed on Amazon EKS. The infrastructure is provisioned using Terraform, containerized with Docker, stored in Amazon ECR, and deployed to kubernetes using Jenkins pipeline.
 
 ## Architecture
 ![Architecture](./architecture.gif)
@@ -58,7 +59,7 @@ Tools Used
  • Set up NGINX Ingress Controller for traffic routing and zero-downtime deployments
 
 4. Security
- • All sensitive values stored in Kubernetes Secrets and IAM roles — no hardcoded credentials
+ • All sensitive values stored in Kubernetes Secrets and IAM roles 
  • Production workloads isolated in private subnets
  • Vulnerability scanning integrated directly into the CI/CD pipeline
  • Terraform resource tagging applied for ownership and cost tracking
