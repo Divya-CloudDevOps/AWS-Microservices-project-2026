@@ -6,8 +6,8 @@ pipeline {
     }
     environment  {
         SCANNER_HOME=tool 'sonar-scanner'
-        AWS_ACCOUNT_ID = 910972978008
-        AWS_ECR_REPO_NAME = backend
+        AWS_ACCOUNT_ID = '910972978008'
+        AWS_ECR_REPO_NAME = 'backend'
         AWS_DEFAULT_REGION = 'ap-south-1'
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/"
     }
@@ -53,7 +53,7 @@ pipeline {
                     dir('backend') {
                             sh 'docker system prune -f'
                             sh 'docker container prune -f'
-                            sh 'docker build -t ${AWS_ECR_REPO_NAME} .'
+                            sh 'docker build -t backend .'
                     }
                 }
             }
