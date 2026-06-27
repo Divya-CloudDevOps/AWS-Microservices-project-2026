@@ -52,7 +52,7 @@ pipeline {
                 script {
                     dir('backend') {
                             sh 'docker system prune -f'
-                           sh 'docker build -t backend:${BUILD_NUMBER} .'                    
+                           sh "docker build -t backend:${BUILD_NUMBER} ."                   
                 }
             }
         }
