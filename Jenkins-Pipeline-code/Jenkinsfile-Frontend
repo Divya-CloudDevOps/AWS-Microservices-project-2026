@@ -53,8 +53,8 @@ pipeline {
                     dir('client') {
                             sh 'docker system prune -f'
                             sh 'docker container prune -f'
-                            sh 'docker build -t client .'
-                    }
+                            sh 'docker build -t client:${BUILD_NUMBER} .'
+                   }
                 }
             }
         }
@@ -62,14 +62,15 @@ pipeline {
             steps {
                 script {
                         sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 910972978008.dkr.ecr.ap-south-1.amazonaws.com'                       
-                        sh 'docker tag client:latest 910972978008.dkr.ecr.ap-south-1.amazonaws.com/client:latest'
-                        sh 'docker push 910972978008.dkr.ecr.ap-south-1.amazonaws.com/client:latest'                }
+                        sh 'docker tag client:${BUILD_NUMBER} ${REPOSITORY_URI}/client:${BUILD_NUMBER}'
+                        sh 'docker push ${REPOSITORY_URI}/client:${BUILD_NUMBER}'                                     
+               }
             }
         }
         stage("TRIVY Image Scan") {
             steps {
-                sh 'trivy image 910972978008.dkr.ecr.ap-south-1.amazonaws.com/client:latest > trivyimage.txt'
-            }
+                sh trivy image ${REPOSITORY_URI}/client:${BUILD_NUMBER}
+           }
         }
         
         stage('Update Deployment file') {
