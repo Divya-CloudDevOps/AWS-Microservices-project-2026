@@ -1,5 +1,7 @@
 pipeline {
-    jenkins agent 
+  agent {
+     label 'jenkins-agent'
+}
     tools {
         jdk 'jdk21'
         nodejs 'NodeJS18'
@@ -36,7 +38,7 @@ pipeline {
         stage('Quality Check') {
             steps {
                 script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token' 
+                    waitForQualityGate abortPipeline: false 
                 }
             }
         }
