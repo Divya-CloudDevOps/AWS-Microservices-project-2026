@@ -1,11 +1,11 @@
 pipeline {
-    agent any 
+    jenkins agent 
     tools {
-        jdk 'jdk'
-        nodejs 'nodejs'
+        jdk 'jdk21'
+        nodejs 'NodeJS18'
     }
     environment  {
-        SCANNER_HOME=tool 'sonar-scanner'
+        SCANNER_HOME=tool 'SonarScanner'
         AWS_ACCOUNT_ID = '910972978008'
         AWS_ECR_REPO_NAME = 'client'
         AWS_DEFAULT_REGION = 'ap-south-1'
@@ -25,7 +25,7 @@ pipeline {
         stage('Sonarqube Analysis') {
             steps {
                 dir('client') {
-                    withSonarQubeEnv('sonar-server') {
+                    withSonarQubeEnv('sonarqube') {
                         sh ''' $SCANNER_HOME/bin/sonar-scanner \
                         -Dsonar.projectName=three-tier-frontend \
                         -Dsonar.projectKey=three-tier-frontend '''
@@ -61,9 +61,9 @@ pipeline {
             steps {
                 script {
                         sh 'aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 910972978008.dkr.ecr.ap-south-1.amazonaws.com'
-                        sh 'docker tag client:latest 910972978008.dkr.ecr.ap-south-1.amazonaws.com/client:latest'                     
-                        sh 'docker push 910972978008.dkr.ecr.ap-south-1.amazonaws.com/client:latest'
-               }
+                        sh 'docker tag client:${BUILD_NUMBER} ${REPOSITORY_URI}/client:${BUILD_NUMBER}'
+                        sh 'docker push ${REPOSITORY_URI}/client:${BUILD_NUMBER}'               
+                 }
             }
         }
         stage("TRIVY Image Scan") {
