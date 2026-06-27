@@ -87,7 +87,7 @@ pipeline {
                             echo $BUILD_NUMBER
                             sed -i "s#image:.*#image: ${REPOSITORY_URI}/${AWS_ECR_REPO_NAME}:latest#g" frontend-deploy-service.yaml                          
                             git add .
-                            git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
+                            git diff --cached --quiet || git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
                             git push https://${git_token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
         
                         '''
