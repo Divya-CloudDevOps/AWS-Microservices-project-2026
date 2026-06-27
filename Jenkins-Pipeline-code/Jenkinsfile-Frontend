@@ -52,7 +52,6 @@ pipeline {
                 script {
                     dir('client') {
                             sh 'docker system prune -f'
-                            sh 'docker container prune -f'
                             sh 'docker build -t client:${BUILD_NUMBER} .'
                    }
                 }
@@ -69,7 +68,9 @@ pipeline {
         }
         stage("TRIVY Image Scan") {
             steps {
-                sh trivy image ${REPOSITORY_URI}/client:${BUILD_NUMBER}
+                sh """
+                trivy image ${REPOSITORY_URI}/client:${BUILD_NUMBER}  > trivyimage.txt
+                """
            }
         }
         
@@ -86,7 +87,7 @@ pipeline {
                             git config user.name "Divya-CloudDevOps"
                             BUILD_NUMBER=${BUILD_NUMBER}
                             echo $BUILD_NUMBER
-                            sed -i "s#image:.*#image: ${REPOSITORY_URI}/${AWS_ECR_REPO_NAME}:latest#g" frontend-deploy-service.yaml                          
+                            sed -i "s#image:.*#image: ${REPOSITORY_URI}/${AWS_ECR_REPO_NAME}:${BUILD_NUMBER}#g" frontend-deploy-service.yaml
                             git add .
                             git diff --cached --quiet || git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
                             git push https://${git_token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
