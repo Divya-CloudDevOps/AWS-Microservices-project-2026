@@ -9,8 +9,8 @@ pipeline {
         AWS_ACCOUNT_ID = '910972978008'
         AWS_ECR_REPO_NAME = 'client'
         AWS_DEFAULT_REGION = 'ap-south-1'
-        REPOSITORY_URI = "${910972978008).dkr.ecr.${ap-south-1}.amazonaws.com/"
-    }
+        REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+}
     stages {
         stage('Cleaning Workspace') {
             steps {
@@ -68,7 +68,7 @@ pipeline {
         }
         stage("TRIVY Image Scan") {
             steps {
-                sh 'trivy image ${910972978008.dkr.ecr.ap-south-1.amazonaws.com/client}/${client}:${BUILD_NUMBER} > trivyimage.txt' 
+                sh 'trivy image 910972978008.dkr.ecr.ap-south-1.amazonaws.com/client:latest > trivyimage.txt'
             }
         }
         stage('Checkout Code') {
@@ -89,8 +89,7 @@ pipeline {
                             git config user.name "Divya-CloudDevOps"
                             BUILD_NUMBER=${BUILD_NUMBER}
                             echo $BUILD_NUMBER
-                            sed -i "s#image:.*#image: $910972978008.dkr.ecr.ap-south-1.amazonaws.com/client$client:$BUILD_NUMBER#g" frontend-deploy-service.yaml
-                            git add .
+                            sed -i "s#image:.*#image: ${REPOSITORY_URI}/${AWS_ECR_REPO_NAME}:latest#g" frontend-deploy-service.yaml                            git add .
                             git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
                             git push https://${git_token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
         
