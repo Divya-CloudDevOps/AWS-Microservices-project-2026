@@ -17,7 +17,7 @@ spec:
       containers:
       - name: backend
         image: 535252061083.dkr.ecr.ap-south-1.amazonaws.com/backend:4
-        ports: 80
+        ports: 
         - containerPort: 80
         env:
         - name: DB_HOST
