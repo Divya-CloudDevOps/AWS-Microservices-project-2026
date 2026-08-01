@@ -86,16 +86,16 @@ pipeline {
             }
             steps {
                 dir('kubernetes-files') {
-                    withCredentials([string(credentialsId: 'Jenkins-GitHub-Token', variable: 'git_token')]) {
+                    withCredentials([string(credentialsId: 'github-token', variable: 'git_token')]) {
                         sh '''
-                            git config user.email "usercloud003@gmail.com"
+                            git config user.email "250100747+Divya-CloudDevOps@users.noreply.github.com"
                             git config user.name "Divya-CloudDevOps"
                             BUILD_NUMBER=${BUILD_NUMBER}
                             echo $BUILD_NUMBER
                             sed -i "s#image:.*#image: $REPOSITORY_URI$AWS_ECR_REPO_NAME:$BUILD_NUMBER#g" backend-deployment.yaml
                             git add .
                             git diff --cached --quiet || git commit -m "Update deployment Image to version \${BUILD_NUMBER}"
-                            git push https://${git_token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                            git push https://${git_token}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME}.git HEAD:main
                         '''
                     }
                 }
