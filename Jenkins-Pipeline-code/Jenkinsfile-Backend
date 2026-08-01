@@ -61,7 +61,7 @@ pipeline {
             steps {
                 script {                     
                         sh """
-                        aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 910972978008.dkr.ecr.ap-south-1.amazonaws.com 
+                        aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 535252061083.dkr.ecr.ap-south-1.amazonaws.com
 
                         docker tag backend:${BUILD_NUMBER} ${REPOSITORY_URI}${AWS_ECR_REPO_NAME}:${BUILD_NUMBER}
 
